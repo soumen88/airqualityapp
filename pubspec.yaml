@@ -39,8 +39,11 @@ dependencies:
   #Internet connectivity checker
   connectivity_plus: ^3.0.2
 
-  #getting gps location
+  #getting gps location values in lat and long
   location: ^4.4.0
+
+  #get current location
+  geolocator: ^8.2.1
 
   #Screen routing in the app
   auto_route: ^5.0.4
@@ -48,13 +51,14 @@ dependencies:
   #For api calls
   dio: ^4.0.6
 
-  #For generating stateful widgets
+  #For generating riverpod consumer widgets
   hooks_riverpod: ^2.1.3
 
   #Dependency injection in flutter
   injectable: ^2.1.0
 
-
+  #Generating stateful widgets
+  flutter_hooks: ^0.18.5+1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -80,6 +84,9 @@ dev_dependencies:
 
   #Dependency injection generator
   injectable_generator: ^2.1.3
+
+  #For firing build runner command
+  build_runner: ^2.3.3
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -90,7 +97,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  assets:
+    - assets/images/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
