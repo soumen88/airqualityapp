@@ -59,6 +59,13 @@ dependencies:
 
   #Generating stateful widgets
   flutter_hooks: ^0.18.5+1
+
+  #Consuming apis into the app
+  dartz: ^0.10.1
+  rxdart: ^0.27.7
+
+  #to and from json
+  json_serializable: ^6.5.4
 dev_dependencies:
   flutter_test:
     sdk: flutter

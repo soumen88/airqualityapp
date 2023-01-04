@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:airqualityapp/routes/app_router.gr.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -14,9 +16,10 @@ class SplashScreenPage extends HookWidget {
     //Start home screen whenever timer is over
     useEffect((){
       Timer(Duration(seconds: ApplicationConstants.kSplashScreenTime), () {
-        //context.router.replace(const HomeScreenRoute());
+        context.router.replace(const ChooseCountryScreen());
       });
     });
+
 
     // Display Splash screen logo
     return Scaffold(
