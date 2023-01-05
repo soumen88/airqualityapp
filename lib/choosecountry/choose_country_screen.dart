@@ -3,7 +3,7 @@ import 'package:airqualityapp/choosecountry/models/country_data.dart';
 import 'package:airqualityapp/choosecountry/models/country_list.dart';
 import 'package:airqualityapp/dependencyinjection/injection.dart';
 import 'package:airqualityapp/loading/loading_widget.dart';
-import 'package:airqualityapp/providers/country_data_provider.dart';
+import 'package:airqualityapp/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
