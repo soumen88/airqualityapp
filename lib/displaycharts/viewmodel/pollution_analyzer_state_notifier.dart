@@ -5,11 +5,13 @@ import 'package:airqualityapp/displaycharts/model/air_index_model.dart';
 import 'package:airqualityapp/displaycharts/model/air_pollution_model.dart';
 import 'package:airqualityapp/displaycharts/graph_point.dart';
 import 'package:airqualityapp/displaycharts/viewmodel/pollution_analyzer_events.dart';
+import 'package:airqualityapp/enums/chart_value_enum.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class PollutionAnalyzerStateNotifier extends StateNotifier<PollutionAnalyzerEvents>{
   final _TAG = "PollutionAnalyzerStateNotifier";
   final _logger = locator<LoggerUtils>();
+  late AirPollutionModel _airPollutionModel;
 
   PollutionAnalyzerStateNotifier() : super(const PollutionAnalyzerEvents.loading()){
     hitServerToGetPollutionData();
@@ -26,12 +28,12 @@ class PollutionAnalyzerStateNotifier extends StateNotifier<PollutionAnalyzerEven
          _logger.log(_TAG, "Exception occurred $exception");
        },
        (response){
-           AirPollutionModel airIndexModel = AirPollutionModel.fromJson(response?.data ?? "");
+           _airPollutionModel = AirPollutionModel.fromJson(response?.data ?? "");
            //_logger.log(_TAG, "Air index model $airIndexModel");
            _logger.log(_TAG, "Set state to fetch data");
-           if(airIndexModel.airIndexModelList != null && airIndexModel.airIndexModelList!.isNotEmpty){
+           if(_airPollutionModel.airIndexModelList != null && _airPollutionModel.airIndexModelList!.isNotEmpty){
              int indexCounter = 0;
-             List<GraphPoint> points = airIndexModel.airIndexModelList!.map(
+             List<GraphPoint> points = _airPollutionModel.airIndexModelList!.map(
                 (AirIndexModel airIndexModel){
                   indexCounter++;
                   return GraphPoint(x: indexCounter.toDouble(), y: airIndexModel.components!.no2!);
@@ -45,4 +47,63 @@ class PollutionAnalyzerStateNotifier extends StateNotifier<PollutionAnalyzerEven
     );
   }
 
+  void filterChartData(ChartValueEnum chartValueEnum){
+    int indexCounter = 0;
+    switch(chartValueEnum){
+      case ChartValueEnum.CARBONMONO :{
+
+        List<GraphPoint> points = _airPollutionModel.airIndexModelList!.map(
+                (AirIndexModel airIndexModel){
+              indexCounter++;
+              return GraphPoint(x: indexCounter.toDouble(), y: airIndexModel.components!.co!);
+            }
+        ).toList();
+
+        state = PollutionAnalyzerEvents.displayGraph(points);
+      }
+      break;
+      case ChartValueEnum.NITROGENOXIDE :{
+        List<GraphPoint> points = _airPollutionModel.airIndexModelList!.map(
+                (AirIndexModel airIndexModel){
+              indexCounter++;
+              return GraphPoint(x: indexCounter.toDouble(), y: airIndexModel.components!.no!);
+            }
+        ).toList();
+
+        state = PollutionAnalyzerEvents.displayGraph(points);
+      }
+        break;
+      case ChartValueEnum.NITROGENDIOXIDE :{
+        List<GraphPoint> points = _airPollutionModel.airIndexModelList!.map(
+                (AirIndexModel airIndexModel){
+              indexCounter++;
+              return GraphPoint(x: indexCounter.toDouble(), y: airIndexModel.components!.no2!);
+            }
+        ).toList();
+
+        state = PollutionAnalyzerEvents.displayGraph(points);
+      }
+        break;
+      case ChartValueEnum.SULPHURDIOXIDE:
+        List<GraphPoint> points = _airPollutionModel.airIndexModelList!.map(
+                (AirIndexModel airIndexModel){
+              indexCounter++;
+              return GraphPoint(x: indexCounter.toDouble(), y: airIndexModel.components!.so2!);
+            }
+        ).toList();
+
+        state = PollutionAnalyzerEvents.displayGraph(points);
+        break;
+      case ChartValueEnum.PARTICULATEMATTER:
+        List<GraphPoint> points = _airPollutionModel.airIndexModelList!.map(
+                (AirIndexModel airIndexModel){
+              indexCounter++;
+              return GraphPoint(x: indexCounter.toDouble(), y: airIndexModel.components!.pm10!);
+            }
+        ).toList();
+
+        state = PollutionAnalyzerEvents.displayGraph(points);
+        break;
+    }
+  }
 }

@@ -18,7 +18,7 @@ class SplashScreenPage extends HookWidget {
     useEffect((){
       Timer(Duration(seconds: ApplicationConstants.kSplashScreenTime), () {
         //context.router.replace(const ChooseCountryScreen());
-        context.router.replace(const DisplayChartsScreenRoute());
+        context.router.replace(const ChooseStateScreenRoute());
       });
     });
 
