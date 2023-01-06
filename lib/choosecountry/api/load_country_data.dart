@@ -8,14 +8,11 @@ class LoadCountryData {
   final _logger = locator<LoggerUtils>();
 
   Future<CountryList?> getAllCountryList() async{
-      _logger.log(_TAG, "Now going to load data");
       ChooseCountryRepository chooseCountryRepository = ChooseCountryRepository();
       CountryList? countryList = null;
       final countryListResponse = await chooseCountryRepository.getCountryList();
-      _logger.log(_TAG, "After getting response $countryListResponse");
       countryListResponse.fold(
          (exception){
-            _logger.log(_TAG, "Exception occurred $exception");
             return null;
          },
          (response){

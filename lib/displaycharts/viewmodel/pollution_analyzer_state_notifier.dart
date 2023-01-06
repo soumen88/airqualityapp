@@ -34,7 +34,7 @@ class PollutionAnalyzerStateNotifier extends StateNotifier<PollutionAnalyzerEven
              List<GraphPoint> points = airIndexModel.airIndexModelList!.map(
                 (AirIndexModel airIndexModel){
                   indexCounter++;
-                  return GraphPoint(x: indexCounter.toDouble(), y: airIndexModel.components!.co!);
+                  return GraphPoint(x: indexCounter.toDouble(), y: airIndexModel.components!.no2!);
                 }
              ).toList();
 

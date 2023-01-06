@@ -6,5 +6,6 @@ class ApplicationConstants {
   static const splashBackgroundColor = const Color(0xFFff5757);
   static const kWentWrongMessage = "Something went wrong";
   static const k404Message = "Endpoint missing";
+  static const kCountryName = "India";
 
 }
