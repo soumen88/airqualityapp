@@ -119,6 +119,11 @@ class DisplayChartsScreenPage extends HookConsumerWidget{
               onWillPop: _onBackPress
           );
         },
+        error: (){
+          return Center(
+            child: Text("Unable to fetch location"),
+          );
+        },
         loading: (){
           return LoadingWidget();
         },

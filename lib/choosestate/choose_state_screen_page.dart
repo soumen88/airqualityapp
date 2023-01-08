@@ -3,6 +3,8 @@ import 'package:airqualityapp/choosestate/models/state_list.dart';
 import 'package:airqualityapp/common/state_display_card.dart';
 import 'package:airqualityapp/loading/loading_widget.dart';
 import 'package:airqualityapp/providers/providers.dart';
+import 'package:airqualityapp/routes/app_router.gr.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -48,7 +50,7 @@ class ChooseStateScreenPage extends HookConsumerWidget{
                         return StateDisplayCard(
                             name: currentStateName.stateName!,
                             stateSelected: (String stateName){
-
+                              context.router.navigate(const ForecastScreenRoute());
                             },
                         );
                       },

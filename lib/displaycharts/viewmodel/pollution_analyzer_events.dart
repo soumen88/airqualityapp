@@ -8,4 +8,5 @@ part 'pollution_analyzer_events.freezed.dart';
 class PollutionAnalyzerEvents with _$PollutionAnalyzerEvents {
   const factory PollutionAnalyzerEvents.displayGraph(List<GraphPoint> points) = _DisplayGraph;
   const factory PollutionAnalyzerEvents.loading() = _Loading;
+  const factory PollutionAnalyzerEvents.error() = _Error;
 }

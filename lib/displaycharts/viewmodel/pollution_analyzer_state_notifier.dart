@@ -6,7 +6,10 @@ import 'package:airqualityapp/displaycharts/model/air_pollution_model.dart';
 import 'package:airqualityapp/displaycharts/graph_point.dart';
 import 'package:airqualityapp/displaycharts/viewmodel/pollution_analyzer_events.dart';
 import 'package:airqualityapp/enums/chart_value_enum.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../base/permission_utils.dart';
 
 class PollutionAnalyzerStateNotifier extends StateNotifier<PollutionAnalyzerEvents>{
   final _TAG = "PollutionAnalyzerStateNotifier";
@@ -21,30 +24,39 @@ class PollutionAnalyzerStateNotifier extends StateNotifier<PollutionAnalyzerEven
 
   Future<void> hitServerToGetPollutionData() async{
     state = const PollutionAnalyzerEvents.loading();
-    PollutionAnalyzerRepository pollutionAnalyzerRepository = PollutionAnalyzerRepository();
-    var pollutionResponse = await pollutionAnalyzerRepository.getPollutionData();
-    pollutionResponse.fold(
-       (exception){
-         _logger.log(_TAG, "Exception occurred $exception");
-       },
-       (response){
-           _airPollutionModel = AirPollutionModel.fromJson(response?.data ?? "");
-           //_logger.log(_TAG, "Air index model $airIndexModel");
-           _logger.log(_TAG, "Set state to fetch data");
-           if(_airPollutionModel.airIndexModelList != null && _airPollutionModel.airIndexModelList!.isNotEmpty){
-             int indexCounter = 0;
-             List<GraphPoint> points = _airPollutionModel.airIndexModelList!.map(
-                (AirIndexModel airIndexModel){
-                  indexCounter++;
-                  return GraphPoint(x: indexCounter.toDouble(), y: airIndexModel.components!.no2!);
-                }
-             ).toList();
+    PermissionUtils permissionUtils = PermissionUtils();
+    Position? userPosition = await permissionUtils.determineUserPosition();
+    if(userPosition != null){
+      PollutionAnalyzerRepository pollutionAnalyzerRepository = PollutionAnalyzerRepository();
+      var pollutionResponse = await pollutionAnalyzerRepository.getPollutionData(userPosition.latitude, userPosition.longitude);
+      pollutionResponse.fold(
+         (exception){
+            _logger.log(_TAG, "Exception occurred $exception");
+            state = const PollutionAnalyzerEvents.error();
+          },
+          (response){
+            _airPollutionModel = AirPollutionModel.fromJson(response?.data ?? "");
+            //_logger.log(_TAG, "Air index model $airIndexModel");
+            _logger.log(_TAG, "Set state to fetch data");
+            if(_airPollutionModel.airIndexModelList != null && _airPollutionModel.airIndexModelList!.isNotEmpty){
+              int indexCounter = 0;
+              List<GraphPoint> points = _airPollutionModel.airIndexModelList!.map(
+                      (AirIndexModel airIndexModel){
+                    indexCounter++;
+                    return GraphPoint(x: indexCounter.toDouble(), y: airIndexModel.components!.no2!);
+                  }
+              ).toList();
 
-             state = PollutionAnalyzerEvents.displayGraph(points);
-           }
+              state = PollutionAnalyzerEvents.displayGraph(points);
+            }
 
-       }
-    );
+          }
+      );
+    }
+    else{
+      state = const PollutionAnalyzerEvents.error();
+    }
+
   }
 
   void filterChartData(ChartValueEnum chartValueEnum){

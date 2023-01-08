@@ -20,18 +20,21 @@ mixin _$PollutionAnalyzerEvents {
   TResult when<TResult extends Object?>({
     required TResult Function(List<GraphPoint> points) displayGraph,
     required TResult Function() loading,
+    required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<GraphPoint> points)? displayGraph,
     TResult? Function()? loading,
+    TResult? Function()? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<GraphPoint> points)? displayGraph,
     TResult Function()? loading,
+    TResult Function()? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$PollutionAnalyzerEvents {
   TResult map<TResult extends Object?>({
     required TResult Function(_DisplayGraph value) displayGraph,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DisplayGraph value)? displayGraph,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DisplayGraph value)? displayGraph,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -147,6 +153,7 @@ class _$_DisplayGraph implements _DisplayGraph {
   TResult when<TResult extends Object?>({
     required TResult Function(List<GraphPoint> points) displayGraph,
     required TResult Function() loading,
+    required TResult Function() error,
   }) {
     return displayGraph(points);
   }
@@ -156,6 +163,7 @@ class _$_DisplayGraph implements _DisplayGraph {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<GraphPoint> points)? displayGraph,
     TResult? Function()? loading,
+    TResult? Function()? error,
   }) {
     return displayGraph?.call(points);
   }
@@ -165,6 +173,7 @@ class _$_DisplayGraph implements _DisplayGraph {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<GraphPoint> points)? displayGraph,
     TResult Function()? loading,
+    TResult Function()? error,
     required TResult orElse(),
   }) {
     if (displayGraph != null) {
@@ -178,6 +187,7 @@ class _$_DisplayGraph implements _DisplayGraph {
   TResult map<TResult extends Object?>({
     required TResult Function(_DisplayGraph value) displayGraph,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Error value) error,
   }) {
     return displayGraph(this);
   }
@@ -187,6 +197,7 @@ class _$_DisplayGraph implements _DisplayGraph {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DisplayGraph value)? displayGraph,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
   }) {
     return displayGraph?.call(this);
   }
@@ -196,6 +207,7 @@ class _$_DisplayGraph implements _DisplayGraph {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DisplayGraph value)? displayGraph,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (displayGraph != null) {
@@ -253,6 +265,7 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function(List<GraphPoint> points) displayGraph,
     required TResult Function() loading,
+    required TResult Function() error,
   }) {
     return loading();
   }
@@ -262,6 +275,7 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<GraphPoint> points)? displayGraph,
     TResult? Function()? loading,
+    TResult? Function()? error,
   }) {
     return loading?.call();
   }
@@ -271,6 +285,7 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<GraphPoint> points)? displayGraph,
     TResult Function()? loading,
+    TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -284,6 +299,7 @@ class _$_Loading implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_DisplayGraph value) displayGraph,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Error value) error,
   }) {
     return loading(this);
   }
@@ -293,6 +309,7 @@ class _$_Loading implements _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DisplayGraph value)? displayGraph,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
   }
@@ -302,6 +319,7 @@ class _$_Loading implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DisplayGraph value)? displayGraph,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -313,4 +331,110 @@ class _$_Loading implements _Loading {
 
 abstract class _Loading implements PollutionAnalyzerEvents {
   const factory _Loading() = _$_Loading;
+}
+
+/// @nodoc
+abstract class _$$_ErrorCopyWith<$Res> {
+  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
+      __$$_ErrorCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ErrorCopyWithImpl<$Res>
+    extends _$PollutionAnalyzerEventsCopyWithImpl<$Res, _$_Error>
+    implements _$$_ErrorCopyWith<$Res> {
+  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Error implements _Error {
+  const _$_Error();
+
+  @override
+  String toString() {
+    return 'PollutionAnalyzerEvents.error()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Error);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<GraphPoint> points) displayGraph,
+    required TResult Function() loading,
+    required TResult Function() error,
+  }) {
+    return error();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<GraphPoint> points)? displayGraph,
+    TResult? Function()? loading,
+    TResult? Function()? error,
+  }) {
+    return error?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<GraphPoint> points)? displayGraph,
+    TResult Function()? loading,
+    TResult Function()? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_DisplayGraph value) displayGraph,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Error value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_DisplayGraph value)? displayGraph,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_DisplayGraph value)? displayGraph,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Error implements PollutionAnalyzerEvents {
+  const factory _Error() = _$_Error;
 }

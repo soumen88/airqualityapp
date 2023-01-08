@@ -129,7 +129,9 @@ class ForecastScreenPage extends HookConsumerWidget{
           return LoadingWidget();
         },
         error: (){
-          return Text("Something Went Wrong");
+          return Center(
+            child: Text("Unable to get your location"),
+          );
         }
     );
 
