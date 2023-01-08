@@ -21,25 +21,36 @@ class ForecastListItem extends StatelessWidget{
         borderRadius: BorderRadius.circular(10),
       ),
       color: ApplicationConstants.greenColor,
-      child: Row(
-        children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.network(
-                "http://openweathermap.org/img/w/${forecastListModel.weatherModelList!.first.icon}.png",
-              ),
-              Text(getCurrentDate(forecastListModel.currentTimestamp!))
-            ],
-          ),
-
-          Column(
+      child: Container(
+        margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+        child: Row(
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Text(forecastListModel.weatherModelList!.first.weatherType!),
-                Text("Description : ${forecastListModel.weatherModelList!.first.description!}"),
+                Image.network(
+                  "http://openweathermap.org/img/w/${forecastListModel.weatherModelList!.first.icon}.png",
+                ),
+                Text(getCurrentDate(forecastListModel.currentTimestamp!))
               ],
-          )
-        ],
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Column(
+              children: [
+                Text(
+                    "${forecastListModel.weatherModelList!.first.weatherType!}, ${forecastListModel.weatherModelList!.first.description!}",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold
+                    ),
+                ),
+                Text("Max : ${forecastListModel.weatherMain!.maxTemperature!}, Min : ${forecastListModel.weatherMain!.minTemperature!}"),
+                Text("Current : ${forecastListModel.weatherMain!.temp!}")
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

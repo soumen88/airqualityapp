@@ -9,6 +9,10 @@ class WeatherMain with _$WeatherMain{
   @JsonSerializable(explicitToJson: true)
   const factory WeatherMain({
     required double? temp,
+    @JsonKey(name: "temp_min")
+    required double? minTemperature,
+    @JsonKey(name: "temp_max")
+    required double? maxTemperature,
     required int? humidity,
   }) = _WeatherMain;
 

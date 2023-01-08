@@ -6,6 +6,7 @@ import 'package:airqualityapp/displaycharts/graph_point.dart';
 import 'package:airqualityapp/enums/chart_value_enum.dart';
 import 'package:airqualityapp/loading/loading_widget.dart';
 import 'package:airqualityapp/providers/providers.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,21 +24,30 @@ class DisplayChartsScreenPage extends HookConsumerWidget{
 
     useEffect((){
       _logger.log(_TAG, "Inside use effect");
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
       SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft,DeviceOrientation.landscapeRight]);
     }, const []);
 
     final polutionAnalyzerState = ref.watch(pollutionAnalyzerProvider);
     final pollutionNotifier = ref.watch(pollutionAnalyzerProvider.notifier);
+
+    Future<bool> _onBackPress() async{
+      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]);
+      context.router.navigateBack();
+      return Future.value(false);
+    }
+
     return polutionAnalyzerState.when(
         displayGraph: (List<GraphPoint> points){
           _logger.log(_TAG, "Will display chart now");
-
-          return Scaffold(
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
+          return WillPopScope(
+              child: Scaffold(
+                body: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(height: 10,),
+                      Container(
                     height: 50,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
@@ -77,28 +87,36 @@ class DisplayChartsScreenPage extends HookConsumerWidget{
                       ],
                     ),
                   ),
-                  Flexible(
-                    flex: 1,
-                    child: AspectRatio(
-                    aspectRatio: 2,
-                    child: LineChart(
-                      LineChartData(
-                        lineBarsData: [
-                          LineChartBarData(
-                            spots: points.map((point) => FlSpot(point.x, point.y)).toList(),
-                            isCurved: false,
-                            // dotData: FlDotData(
-                            //   show: false,
-                            // ),
+                      Flexible(
+                      flex: 1,
+                      child: AspectRatio(
+                        aspectRatio: 2,
+                        child: LineChart(
+                          LineChartData(
+                            lineBarsData: [
+                              LineChartBarData(
+                                spots: points.map((point) => FlSpot(point.x, point.y)).toList(),
+                                isCurved: false,
+                                // dotData: FlDotData(
+                                //   show: false,
+                                // ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      )
                   )
-                  )
-                ],
+                    ],
+                  ),
+                ),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: (){
+                    _onBackPress();
+                  },
+                  child: Icon(Icons.arrow_back_ios_rounded),
+                ),
               ),
-            ),
+              onWillPop: _onBackPress
           );
         },
         loading: (){

@@ -21,6 +21,10 @@ WeatherMain _$WeatherMainFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$WeatherMain {
   double? get temp => throw _privateConstructorUsedError;
+  @JsonKey(name: "temp_min")
+  double? get minTemperature => throw _privateConstructorUsedError;
+  @JsonKey(name: "temp_max")
+  double? get maxTemperature => throw _privateConstructorUsedError;
   int? get humidity => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +39,11 @@ abstract class $WeatherMainCopyWith<$Res> {
           WeatherMain value, $Res Function(WeatherMain) then) =
       _$WeatherMainCopyWithImpl<$Res, WeatherMain>;
   @useResult
-  $Res call({double? temp, int? humidity});
+  $Res call(
+      {double? temp,
+      @JsonKey(name: "temp_min") double? minTemperature,
+      @JsonKey(name: "temp_max") double? maxTemperature,
+      int? humidity});
 }
 
 /// @nodoc
@@ -52,12 +60,22 @@ class _$WeatherMainCopyWithImpl<$Res, $Val extends WeatherMain>
   @override
   $Res call({
     Object? temp = freezed,
+    Object? minTemperature = freezed,
+    Object? maxTemperature = freezed,
     Object? humidity = freezed,
   }) {
     return _then(_value.copyWith(
       temp: freezed == temp
           ? _value.temp
           : temp // ignore: cast_nullable_to_non_nullable
+              as double?,
+      minTemperature: freezed == minTemperature
+          ? _value.minTemperature
+          : minTemperature // ignore: cast_nullable_to_non_nullable
+              as double?,
+      maxTemperature: freezed == maxTemperature
+          ? _value.maxTemperature
+          : maxTemperature // ignore: cast_nullable_to_non_nullable
               as double?,
       humidity: freezed == humidity
           ? _value.humidity
@@ -75,7 +93,11 @@ abstract class _$$_WeatherMainCopyWith<$Res>
       __$$_WeatherMainCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({double? temp, int? humidity});
+  $Res call(
+      {double? temp,
+      @JsonKey(name: "temp_min") double? minTemperature,
+      @JsonKey(name: "temp_max") double? maxTemperature,
+      int? humidity});
 }
 
 /// @nodoc
@@ -90,12 +112,22 @@ class __$$_WeatherMainCopyWithImpl<$Res>
   @override
   $Res call({
     Object? temp = freezed,
+    Object? minTemperature = freezed,
+    Object? maxTemperature = freezed,
     Object? humidity = freezed,
   }) {
     return _then(_$_WeatherMain(
       temp: freezed == temp
           ? _value.temp
           : temp // ignore: cast_nullable_to_non_nullable
+              as double?,
+      minTemperature: freezed == minTemperature
+          ? _value.minTemperature
+          : minTemperature // ignore: cast_nullable_to_non_nullable
+              as double?,
+      maxTemperature: freezed == maxTemperature
+          ? _value.maxTemperature
+          : maxTemperature // ignore: cast_nullable_to_non_nullable
               as double?,
       humidity: freezed == humidity
           ? _value.humidity
@@ -109,7 +141,11 @@ class __$$_WeatherMainCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true)
 class _$_WeatherMain implements _WeatherMain {
-  const _$_WeatherMain({required this.temp, required this.humidity});
+  const _$_WeatherMain(
+      {required this.temp,
+      @JsonKey(name: "temp_min") required this.minTemperature,
+      @JsonKey(name: "temp_max") required this.maxTemperature,
+      required this.humidity});
 
   factory _$_WeatherMain.fromJson(Map<String, dynamic> json) =>
       _$$_WeatherMainFromJson(json);
@@ -117,11 +153,17 @@ class _$_WeatherMain implements _WeatherMain {
   @override
   final double? temp;
   @override
+  @JsonKey(name: "temp_min")
+  final double? minTemperature;
+  @override
+  @JsonKey(name: "temp_max")
+  final double? maxTemperature;
+  @override
   final int? humidity;
 
   @override
   String toString() {
-    return 'WeatherMain(temp: $temp, humidity: $humidity)';
+    return 'WeatherMain(temp: $temp, minTemperature: $minTemperature, maxTemperature: $maxTemperature, humidity: $humidity)';
   }
 
   @override
@@ -130,13 +172,18 @@ class _$_WeatherMain implements _WeatherMain {
         (other.runtimeType == runtimeType &&
             other is _$_WeatherMain &&
             (identical(other.temp, temp) || other.temp == temp) &&
+            (identical(other.minTemperature, minTemperature) ||
+                other.minTemperature == minTemperature) &&
+            (identical(other.maxTemperature, maxTemperature) ||
+                other.maxTemperature == maxTemperature) &&
             (identical(other.humidity, humidity) ||
                 other.humidity == humidity));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, temp, humidity);
+  int get hashCode =>
+      Object.hash(runtimeType, temp, minTemperature, maxTemperature, humidity);
 
   @JsonKey(ignore: true)
   @override
@@ -155,6 +202,8 @@ class _$_WeatherMain implements _WeatherMain {
 abstract class _WeatherMain implements WeatherMain {
   const factory _WeatherMain(
       {required final double? temp,
+      @JsonKey(name: "temp_min") required final double? minTemperature,
+      @JsonKey(name: "temp_max") required final double? maxTemperature,
       required final int? humidity}) = _$_WeatherMain;
 
   factory _WeatherMain.fromJson(Map<String, dynamic> json) =
@@ -162,6 +211,12 @@ abstract class _WeatherMain implements WeatherMain {
 
   @override
   double? get temp;
+  @override
+  @JsonKey(name: "temp_min")
+  double? get minTemperature;
+  @override
+  @JsonKey(name: "temp_max")
+  double? get maxTemperature;
   @override
   int? get humidity;
   @override

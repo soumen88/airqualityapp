@@ -1,14 +1,19 @@
 import 'package:airqualityapp/base/empty_widget.dart';
 import 'package:airqualityapp/displaycharts/graph_point.dart';
 import 'package:airqualityapp/forecast/city_details_widget.dart';
+import 'package:airqualityapp/forecast/forecast_floating_action_widget.dart';
 import 'package:airqualityapp/forecast/forecast_list_item.dart';
 import 'package:airqualityapp/forecast/model/forecast_list_model.dart';
 import 'package:airqualityapp/forecast/model/forecast_main_model.dart';
 import 'package:airqualityapp/loading/loading_widget.dart';
 import 'package:airqualityapp/providers/providers.dart';
+import 'package:airqualityapp/routes/app_router.gr.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ForecastScreenPage extends HookConsumerWidget{
@@ -64,6 +69,12 @@ class ForecastScreenPage extends HookConsumerWidget{
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    useEffect((){
+      SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]);
+    }, const []);
+
+
     final forecastProviderState = ref.watch(forecastDataProvider);
     final forecastNotifier = ref.watch(forecastDataProvider.notifier);
 
@@ -77,7 +88,7 @@ class ForecastScreenPage extends HookConsumerWidget{
               children: [
                 (forecastModel.city != null) ?
                 CityDetailsWidget(cityModel: forecastModel.city!) : EmptyWidget(),
-                SizedBox(height: 10,),
+                Text("Chart indicating temperature variation"),
                 AspectRatio(
                   aspectRatio: 2,
                   child: BarChart(
@@ -95,7 +106,6 @@ class ForecastScreenPage extends HookConsumerWidget{
                     ),
                   ),
                 ),
-                Text("Chart indicating temperature variation"),
                 Flexible(
                   flex: 1,
                   child: ListView.builder(
@@ -107,6 +117,11 @@ class ForecastScreenPage extends HookConsumerWidget{
                   ),
                 )
               ],
+            ),
+            floatingActionButton: ForecastFloatingActionWidget(
+              onFloatingButtonPress: (){
+                context.router.navigate(const DisplayChartsScreenRoute());
+              },
             ),
           );
         },
