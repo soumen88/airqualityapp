@@ -26,4 +26,17 @@ class PollutionAnalyzerRepository implements IPollutionAnalyzerService {
     }
   }
 
+  @override
+  Future<Either<ErrorAndStackTrace, Response?>> getWeatherForecastData() async{
+    try{
+      final response = await DioUtil.coreDioOpenWeatherInstance?.get('data/2.5/forecast?lat=19.191&lon=72.944&appid=3a8b48c75d62e585e1381e4bebc2ee7f&units=metric');
+      return right(response);
+    }
+    catch(error, stackTrace){
+      return left(ErrorAndStackTrace(error, stackTrace));
+    }
+  }
+
+
+
 }

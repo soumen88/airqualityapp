@@ -18,7 +18,7 @@ class SplashScreenPage extends HookWidget {
     useEffect((){
       Timer(Duration(seconds: ApplicationConstants.kSplashScreenTime), () {
         //context.router.replace(const ChooseCountryScreen());
-        context.router.replace(const ChooseStateScreenRoute());
+        context.router.replace(const ForecastScreenRoute());
       });
     });
 
@@ -51,9 +51,8 @@ class SplashScreenPage extends HookWidget {
               ),
               const Text(ApplicationConstants.APP_NAME,
                 style: TextStyle(
-                  fontSize: 30,
+                  fontSize: 34,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white
                 ),
               ),
 

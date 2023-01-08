@@ -69,6 +69,9 @@ dependencies:
 
   #Drawing charts on app
   fl_chart: ^0.55.2
+
+  #display date on app
+  intl: ^0.18.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

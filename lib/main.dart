@@ -41,7 +41,7 @@ class MyApp extends HookConsumerWidget {
       routeInformationParser: _appRouter.defaultRouteParser(),
       routerDelegate: _appRouter.delegate(),
       theme: ThemeData(
-          primarySwatch: Colors.deepOrange
+          primarySwatch: Colors.green
       ),
       builder: (context, router) => router!,
     );

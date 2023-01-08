@@ -4,4 +4,5 @@ import 'package:rxdart/rxdart.dart';
 
 abstract class IPollutionAnalyzerService{
   Future<Either<ErrorAndStackTrace, Response?>> getPollutionData();
+  Future<Either<ErrorAndStackTrace, Response?>> getWeatherForecastData();
 }
