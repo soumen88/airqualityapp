@@ -15,6 +15,7 @@ class ChooseStateScreenPage extends HookConsumerWidget{
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _stateData = ref.watch(stateDataProvider);
+    final forecaseNotifier = ref.watch(forecastDataProvider.notifier);
     return Scaffold(
       appBar: AppBar(
         title: Text("Select a state"),
@@ -50,6 +51,7 @@ class ChooseStateScreenPage extends HookConsumerWidget{
                         return StateDisplayCard(
                             name: currentStateName.stateName!,
                             stateSelected: (String stateName){
+                              forecaseNotifier.setStateName(stateName);
                               context.router.navigate(const ForecastScreenRoute());
                             },
                         );

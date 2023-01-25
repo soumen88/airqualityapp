@@ -69,14 +69,15 @@ class ForecastScreenPage extends HookConsumerWidget{
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final forecastProviderState = ref.watch(forecastDataProvider);
+    final forecastNotifier = ref.watch(forecastDataProvider.notifier);
 
     useEffect((){
       SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp,DeviceOrientation.portraitDown]);
+      forecastNotifier.init();
     }, const []);
 
 
-    final forecastProviderState = ref.watch(forecastDataProvider);
-    final forecastNotifier = ref.watch(forecastDataProvider.notifier);
 
     return forecastProviderState.when(
         displayGraph: (List<GraphPoint> points, ForecastMainModel forecastModel){
